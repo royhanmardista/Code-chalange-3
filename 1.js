@@ -1,70 +1,83 @@
 /**
- * ===========
- * Deret Prima
- * ===========
- * Diberikan sebuah function prime yang menerima satu parameter bertipe number.
- * Output dari function ini adalah mengembalikan sebuah nilai prima yang merupakan
- * deret dari input parameter
+ * ===============
+ * Element Counter
+ * ===============
  * 
- * CASE 1
- * ======
+ * [Instruction]
+ * buat sebuah function untuk menghitung jumlah masing-masing elemen yang muncul dari array input yang diberikan
  * 
- * input: 5
- * output: 3
- * proses:
- *   angka 1 bukan prima
- *   angka 2 adalah prima -> deret ke-1 bilangan prima
- *   angka 3 adalah prima -> deret ke-2 bilangan prima
- *   angka 4 bukan prima
- *   angka 5 adalah prima -> deret ke-3 bilangan prima
- * maka output adalah 3 karena angka 5 merupakan deret ke-3 bilangan prima
+ * [Description]
+ * 1. function menerima sebuah array sebagai input
+ * 2. function Mengembalikan sebuah object sebagai output yang berisikan elemen yang muncul
+ *    dan jumlah kemunculannya dari input yang diberikan.
  * 
- * CASE 2
- * ======
+ * [Example]
+ * @input = [1, 2, 3, 4, 5, 4, 3, 2, 4]
  * 
- * input: 6
- * output: -1
- * proses:
- *   angka 1 bukan bilangan prima
- *   angka 2 adalah bilangan prima -> deret ke-1 bilangan prima
- *   angka 3 adalah bilangan prima -> deret ke-2 bilangan prima
- *   angka 4 bukan bilangan prima
- *   angka 5 adalah bilangan prima -> deret ke-3 bilangan prima
- *   angka 6 bukan bilangan prima
- * maka output adalah -1 karena angka 6 bukan merupakan bilangan prima
+ * @process
+ * angka 1 muncul 1 kali
+ * angka 2 muncul 2 kali
+ * angka 3 muncul 2 kali
+ * angka 4 muncul 3 kali
+ * angka 5 muncul 1 kali
+ * 
+ * @output
+ * {
+ *    1: 1,
+ *    2: 2,
+ *    3: 2,
+ *    4: 3,
+ *    5: 1,
+ * }
+ * 
+ * [Rules]
+ * 1. `Dilarang` menggunakan built-in function kecuali .unshift() dan .push()
+ * 2. `Wajib dikerjakan dengan pseudocode`.
  */
 
-function prime(num) {
-  // your code here
-  for (let i=2; i<num; i++) {
-    if (num % i === 0 && num != 2) {
-      return -1
+function counter(arr) {
+  // Write your code here
+  var output = {};
+  for (let i=0; i<arr.length; i++) {
+    var temp = arr[i];    
+    if (!output[temp]) {      
+      output[temp] = 1;
+    } else {      
+      output[temp] = output[temp] + 1;
     }
   }
-  var angka = 2;
-  var index = 1;
-  while (num != angka) {
-    var prima = true
-    for (let i=2; i<angka; i++) {
-      if (angka % i === 0) {
-        prima = false;
-      }
-    }
-    if (prima) {
-      angka ++
-      index ++
-    } else {
-      angka ++
-    }
-    
-  }
-  return index
+  return output;
+  // Pseudocode starts here
+  /** Store "output" with empty object
+   * for i=0 to i< Input length 
+   *  DO Store 'Temp' with Input[i]
+   *    IF (!'Temp') 
+   *      DO STORE 'ouput'['temp'] with 1
+   *    ELSE 
+   *      DO STORE 'ouput'['temp'] with 'ouput'['temp'] ADD 1
+   *  NEXT i
+   * DISPLAY 'output' 
+  */     
+
+
 }
 
-console.log(prime(5)); //3
-console.log(prime(27)); //-1
-console.log(prime(7)); //4
-console.log(prime(41)); //13
-console.log(prime(601)); //110
-console.log(prime(99)); //-1
-console.log(prime(4973)); //666
+console.log(counter(['Joyful', 'Infinite', 'Humble', 'Joyful', 'Glory', 'King', 'Humble', 'Infinite']))
+// { Joyful: 2, Infinite: 2, Humble: 2, Glory: 1, King: 1 }
+
+console.log(counter([true, true, false, true, false, true, false, false, true, false]))
+// { true: 5, false: 5 }
+
+console.log(counter([1, 2, 3, 4, 5, 6, 4, 3, 2, 5, 6, 8, 7, 6, 9, 8, 7, 0, 8, 7, 6, 5, 4, 3]))
+// {
+//   '0': 1,
+//   '1': 1,
+//   '2': 2,
+//   '3': 3,
+//   '4': 3,
+//   '5': 3,
+//   '6': 4,
+//   '7': 3,
+//   '8': 3,
+//   '9': 1
+// }
