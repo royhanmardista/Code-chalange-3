@@ -1,76 +1,49 @@
-/**
- * ===================
- * Proxytia BUT Object
- * ===================
- * 
- * [DESCRIPTION]
- * Masih ingat dengan proxitia? Kali ini buatlah sebuah function yang mengecek apakah karakter yang kamu buat
- * sudah valid untuk bermain di proxytia.
- * 
- * [INSTRUCTIONS]
- * 1. fungsi menerima 3 parameter: `name, role, weapon`
- * 2. fungsi akan mengecek apakah role dan senjata yang digunakan sudah valid atau belum
- * 
- * [RULES]
- * 1. `Dilarang menggunakan built-in functions`
- * 2. Asumsi semua parameter selalu terisi
- */
+/*
+=============
+Reverse Array
+=============
 
-function proxytiaObject(name, role, weapon) {
-  var proxytia = {
-    ksatria: ['pedang', 'tombak'],
-    tabib: ['gada'],
-    penyihir: ['tongkat']
-  }
-  // Write your code here
-  if (!proxytia[role]) {
-    return "Role invalid"
-  } else {
-    
-    for (var key in proxytia) {
-      if (key == role) {
-        for (let j=0; j<proxytia[key].length; j++) {
-          if (weapon == proxytia[key][j]) {
-            return "Selamat datang di Proxytia " + role + " " + name + " , gunakan " + weapon + " mu untuk bermain."
-          }        
-        }
-        return "Senjata invalid."
-      }
-    } 
-  }
-  
-    /*if (role === 'ksatria') {
-      if (weapon === proxytia.ksatria[0] || weapon === proxytia.ksatria[1]) {
-        return "Selamat datang di Proxytia " + role + " " + name + " , gunakan " + weapon + " mu untuk bermain."
-      } else {
-        return "Senjata invalid."
-      }
-    } else if (role === 'tabib') {
-      if (weapon === proxytia.tabib[0]) {
-        return "Selamat datang di Proxytia " + role + " " + name + " , gunakan " + weapon + " mu untuk bermain."
-      } else {
-        return "Senjata invalid."
-      }
-    } else if (role == 'penyihir'){
-      if (weapon === proxytia.penyihir[0]) {
-        return "Selamat datang di Proxytia " + role + " " + name + " , gunakan " +weapon + " mu untuk bermain."
-      } else {
-        return "Senjata invalid."
-      } 
-    }  else {
-      return "Role invalid"
-    }*/
+Function reverseAll() mengambil input berupa sebuah array, dan mengembalikan kebalikan dari isi array tersebut
+beserta kebalikan dari angka-angka di dalamnya.
 
+CONTOH:
+
+input : [123, 456]
+
+PROSES:
+1. 456 dibalik jadi 654
+2. 123 dibalik jadi 321
+3. 654 akan berada di index 0 array dan 321 akan berada di index 1 array
+
+output: [654, 321]
+
+catatan: output merupakan array of numbers, bukan array of string
+
+DILARANG MENGGUNAKAN:
+- .map()
+- .filter()
+- .reduce()
+- .reverse()
+- .split()
+- .join()
+*/
+
+function reverseAll(arr) {
+  //Implementasi kode disini!
+  var newArr = [];
+  var element = "";
+  for (let i = arr.length-1; i>=0; i--) {
+    arr[i] = String(arr[i]);
+    for (let j = arr[i].length-1; j>=0; j--) {
+      element += arr[i][j]; 
+    }
+    element = Number(element);
+    newArr.push(element);
+    element = "";
+  }
+  return newArr;
 }
 
-console.log(proxytiaObject('Ucup', 'ksatria', 'tombak'))
-// Selamat datang di Proxytia ksatria Ucup, gunakan tombakmu untuk bermain.
-
-console.log(proxytiaObject('Icha', 'penyihir', 'pedang'))
-// Senjata invalid.
-
-console.log(proxytiaObject('Armedi', 'Programmer', 'tongkat'))
-// Role invalid
-
-console.log(proxytiaObject('Stef', 'penyihir', 'tongkat'))
-// Selamat datang di Proxytia penyihir Stef, gunakan tongkatmu untuk bermain.
+console.log(reverseAll([123, 521, 456])) //[654,125,321]
+console.log(reverseAll([897])) //[798]
+console.log(reverseAll([])) //[]
