@@ -1,76 +1,48 @@
 /**
- * ===================
- * Proxytia BUT Object
- * ===================
+ * ===============
+ * Slice and dice!
+ * ===============
  * 
- * [DESCRIPTION]
- * Masih ingat dengan proxitia? Kali ini buatlah sebuah function yang mengecek apakah karakter yang kamu buat
- * sudah valid untuk bermain di proxytia.
+ * Diberikan sebuah function bernama slice dimana function tersebut menerima tiga paramter.
+ *  - Parameter pertama bernama `data` bertipe array
+ *  - Parameter kedua bernama `start` bertipe number (optional)
+ *  - Parameter ketiga bernama `end` bertipe number (optional)
  * 
- * [INSTRUCTIONS]
- * 1. fungsi menerima 3 parameter: `name, role, weapon`
- * 2. fungsi akan mengecek apakah role dan senjata yang digunakan sudah valid atau belum
+ * Function akan mengembalikan nilai array yang telah dipotong/slice sesuai dengan value dari paramter `start` dan `end`
+ * Array yang di return merupakan potongan array `mulai dari start hingga sebelum end`
  * 
- * [RULES]
- * 1. `Dilarang menggunakan built-in functions`
- * 2. Asumsi semua parameter selalu terisi
+ * ASUMSI:
+ *   - variabel `start` bisa tidak diisi (berarti end-nya juga kosong). Jika hal ini terjadi maka pemotongan data array dimulai dari index ke 0
+ *   - jika value variabel `start` lebih besar dibandingkan jumlah data array, maka function akan mengembalikan array kosong
+ * 
+ * CONTOH CASE BISA DILIHAT PADA DRIVER CODE
+ * 
+ * RULES:
+ *  1. `DILARANG MENGGUNAKAN` built in function selain .push
  */
 
-function proxytiaObject(name, role, weapon) {
-  var proxytia = {
-    ksatria: ['pedang', 'tombak'],
-    tabib: ['gada'],
-    penyihir: ['tongkat']
-  }
+function slice(data, start, end) {
   // Write your code here
-  if (!proxytia[role]) {
-    return "Role invalid"
-  } else {
-    
-    for (var key in proxytia) {
-      if (key == role) {
-        for (let j=0; j<proxytia[key].length; j++) {
-          if (weapon == proxytia[key][j]) {
-            return "Selamat datang di Proxytia " + role + " " + name + " , gunakan " + weapon + " mu untuk bermain."
-          }        
-        }
-        return "Senjata invalid."
-      }
-    } 
+  if (start > end && end != undefined) {
+    return []
+  } else if (start === undefined && end != undefined) {
+    start = 0;
+  } else if (end === undefined && start != undefined) {
+    end = data.length
+  } else if (end === undefined && start === undefined) {
+    return data
   }
-  
-    /*if (role === 'ksatria') {
-      if (weapon === proxytia.ksatria[0] || weapon === proxytia.ksatria[1]) {
-        return "Selamat datang di Proxytia " + role + " " + name + " , gunakan " + weapon + " mu untuk bermain."
-      } else {
-        return "Senjata invalid."
-      }
-    } else if (role === 'tabib') {
-      if (weapon === proxytia.tabib[0]) {
-        return "Selamat datang di Proxytia " + role + " " + name + " , gunakan " + weapon + " mu untuk bermain."
-      } else {
-        return "Senjata invalid."
-      }
-    } else if (role == 'penyihir'){
-      if (weapon === proxytia.penyihir[0]) {
-        return "Selamat datang di Proxytia " + role + " " + name + " , gunakan " +weapon + " mu untuk bermain."
-      } else {
-        return "Senjata invalid."
-      } 
-    }  else {
-      return "Role invalid"
-    }*/
-
+  var output = []
+  for (let i=start; i<end; i++) {
+    output.push(data[i])
+  }
+  return output
 }
 
-console.log(proxytiaObject('Ucup', 'ksatria', 'tombak'))
-// Selamat datang di Proxytia ksatria Ucup, gunakan tombakmu untuk bermain.
+//DRIVER CODE
 
-console.log(proxytiaObject('Icha', 'penyihir', 'pedang'))
-// Senjata invalid.
-
-console.log(proxytiaObject('Armedi', 'Programmer', 'tongkat'))
-// Role invalid
-
-console.log(proxytiaObject('Stef', 'penyihir', 'tongkat'))
-// Selamat datang di Proxytia penyihir Stef, gunakan tongkatmu untuk bermain.
+console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 2)); // [ 'camel', 'duck', 'elephant' ]
+console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 2, 4)); // [ 'camel', 'duck' ]
+console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 1, 5)); // [ 'bison', 'camel', 'duck', 'elephant' ]
+console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'])); //[ 'ant', 'bison', 'camel', 'duck', 'elephant' ]
+console.log(slice(['ant', 'bison', 'camel', 'duck', 'elephant'], 20)); //[]
